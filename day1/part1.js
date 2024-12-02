@@ -1,9 +1,21 @@
 // https://adventofcode.com/2024/day/1
 async function findDistance() {
-  const data = await Deno.readTextFile("../input.txt");
+  let distance = 0;
+
+  const [arr1, arr2] = await createLists();
+
+  for (let i = 0; i < arr1.length; i++) {
+    distance += Math.abs(arr1[i] - arr2[i]);
+  }
+
+  return distance;
+}
+
+export async function createLists() {
+  const data = await Deno.readTextFile(new URL("./input.txt", import.meta.url));
+
   const arr1 = [];
   const arr2 = [];
-  let distance = 0;
 
   const parseData = data
     .trim()
@@ -12,26 +24,21 @@ async function findDistance() {
       const numbers = line
         .trim()
         .split(/\s+/)
-        .map(Number); 
+        .map(Number);
 
       return numbers;
     });
 
-    for (const [num1, num2] of parseData) {
-      arr1.push(num1)
-      arr2.push(num2)
-    }
+  for (const [num1, num2] of parseData) {
+    arr1.push(num1);
+    arr2.push(num2);
+  }
 
-    arr1.sort((a, b) => a - b);
-    arr2.sort((a, b) => a - b);
+  arr1.sort((a, b) => a - b);
+  arr2.sort((a, b) => a - b);
 
-    for (let i = 0; i < arr1.length; i++) {
-      distance += Math.abs(arr1[i] - arr2[i]);
-    }
-
-    return distance
+  return [arr1, arr2];
 }
-
-const result = await findDistance();
+const result = findDistance();
 
 console.log(result);
