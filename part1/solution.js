@@ -1,6 +1,6 @@
 // https://adventofcode.com/2024/day/1
 async function findDistance() {
-  const data = await Deno.readTextFile("input.txt");
+  const data = await Deno.readTextFile("../input.txt");
   const arr1 = [];
   const arr2 = [];
   let distance = 0;
