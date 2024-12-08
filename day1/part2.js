@@ -17,7 +17,7 @@ async function findSimilarity() {
   for (const [k, v] of Object.entries(duplicates)) {
     const intKey = Number(k);
     if (lists[0].includes(intKey)) {
-      answer += intKey * v; 
+      answer += intKey * v;
     }
   }
 
